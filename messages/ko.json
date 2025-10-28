@@ -1,0 +1,15 @@
+{
+  "nav": {
+    "solution": "솔루션",
+    "auricAi": "Auric AI",
+    "company": "회사소개",
+    "contactUs": "문의하기",
+    "serviceIntro": "서비스 소개서"
+  },
+  "common": {
+    "language": "언어"
+  },
+  "footer": {
+    "allRightsReserved": "모든 권리 보유"
+  }
+}
