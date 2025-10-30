@@ -4,12 +4,14 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import LanguageSelector from './LanguageSelector';
-import { MdOutlineFileDownload } from "react-icons/md";
+import DownloadModal from './DownloadModal';
+import { MdOutlineFileDownload } from 'react-icons/md';
 
 export default function Header() {
   const t = useTranslations('nav');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,9 +67,12 @@ export default function Header() {
           <LanguageSelector />
 
           {/* Service Introduction Button */}
-          <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-full border">
-            <MdOutlineFileDownload size={20} />
-            {t('serviceIntro')}
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors font-medium text-lg"
+          >
+            <MdOutlineFileDownload size={24} />
+            소개서 다운로드 하기
           </button>
         </div>
 
@@ -110,13 +115,19 @@ export default function Header() {
             ))}
             <div className="pt-4 border-t space-y-3">
               <LanguageSelector />
-              <button className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">
-                {t('serviceIntro')}
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors font-medium text-lg"
+              >
+                <MdOutlineFileDownload size={24} />
+                소개서 다운로드 하기
               </button>
             </div>
           </nav>
         </div>
       )}
+
+      <DownloadModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </header>
   );
 }
