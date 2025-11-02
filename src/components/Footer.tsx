@@ -9,10 +9,10 @@ export default function Footer() {
   const tFooter = useTranslations('footer');
 
   const navigation = [
-    { name: t('solution'), href: '/solution' },
-    { name: t('auricAi'), href: '/auric-ai' },
-    { name: t('company'), href: '/company' },
-    { name: t('contactUs'), href: '/contact-us' },
+    { name: 'solution', href: '/solution' },
+    { name: 'auricAi', href: '/auric-ai' },
+    { name: 'company', href: '/company' },
+    { name: 'contactUs', href: '/contact-us' },
   ];
 
   return (
@@ -20,11 +20,10 @@ export default function Footer() {
       <div className="flex gap-5 w-pc py-12">
             <div className="text-2xl font-bold text-400 min-w-30">Auric AI</div>
     
-    <div className='flex flex-col w-full'>
-        <div className="flex gap-[15%] mb-8 ">
+    <div className='flex  flex-col w-full'>
+        <div className="flex justify-end gap-[15%] mb-8 ">
           {/* Company Info */}
           <div className="space-y-4">
-         
           </div>
 
           {/* Navigation Links */}
@@ -89,7 +88,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-            <div className="pl-[15%] flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm text-gray-400">
+            <div className="pl-[15%] flex justify-end flex-col md:flex-row items-center space-y-4 md:space-y-0 text-sm text-gray-400">
               © {new Date().getFullYear()} Auric AI. all rights reserved.
           </div>
           </div>

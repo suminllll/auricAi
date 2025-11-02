@@ -27,15 +27,15 @@ export default function Header() {
   }, []);
 
   const navigation = [
-    { name: t('solution'), href: '/solution' },
-    { name: t('auricAi'), href: '/auric-ai' },
-    { name: t('company'), href: '/company' },
-    { name: t('contactUs'), href: '/contact-us' },
+    { name: 'Solution', href: '/solution' },
+    { name: 'Auric AI', href: '/auric-ai' },
+    { name: 'Company', href: '/company' },
+   
   ];
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300`}
+      className={`flex justify-center items-center sticky top-0 z-50 w-full transition-all duration-300 h-[80px]`}
       style={{
         backgroundColor: isScrolled ? '#ffffff' : '#ffffff00'
       }}
@@ -64,8 +64,11 @@ export default function Header() {
           {/* Language Select */}
           <LanguageSelector />
 
+<Link href={'/contact-us'} className=" text-[15px]  flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-full border bg-black text-white">
+            {'Contact Us'}
+          </Link>
           {/* Service Introduction Button */}
-          <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-full border">
+          <button className=" text-[15px]  flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-full border cursor-pointer">
             <MdOutlineFileDownload size={20} />
             {t('serviceIntro')}
           </button>
