@@ -4,12 +4,14 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import LanguageSelector from './LanguageSelector';
-import { MdOutlineFileDownload } from "react-icons/md";
+import DownloadModal from './DownloadModal';
+import { MdOutlineFileDownload } from 'react-icons/md';
 
 export default function Header() {
   const t = useTranslations('nav');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,14 +32,13 @@ export default function Header() {
     { name: 'Solution', href: '/solution' },
     { name: 'Auric AI', href: '/auric-ai' },
     { name: 'Company', href: '/company' },
-   
   ];
 
   return (
     <header
       className={`flex justify-center items-center sticky top-0 z-50 w-full transition-all duration-300 h-[80px]`}
       style={{
-        backgroundColor: isScrolled ? '#ffffff' : '#ffffff00'
+        backgroundColor: isScrolled ? '#ffffff' : '#ffffff00',
       }}
     >
       <div className="w-pc flex h-16 items-center justify-between">
@@ -48,7 +49,7 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          {navigation.map((item) => (
+          {navigation.map(item => (
             <Link
               key={item.href}
               href={item.href}
@@ -64,21 +65,24 @@ export default function Header() {
           {/* Language Select */}
           <LanguageSelector />
 
-<Link href={'/contact-us'} className=" text-[15px]  flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-full border bg-black text-white">
+          <Link
+            href={'/contact-us'}
+            className=" text-[15px]  flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-full border bg-black text-white"
+          >
             {'Contact Us'}
           </Link>
           {/* Service Introduction Button */}
-          <button className=" text-[15px]  flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-full border cursor-pointer">
-            <MdOutlineFileDownload size={20} />
-            {t('serviceIntro')}
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors font-medium text-lg"
+          >
+            <MdOutlineFileDownload size={24} />
+            소개서 다운로드 하기
           </button>
         </div>
 
         {/* Mobile Menu Button */}
-        <button
-          className="md:hidden p-2"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
+        <button className="md:hidden p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           <svg
             className="w-6 h-6"
             fill="none"
@@ -88,11 +92,7 @@ export default function Header() {
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            {isMenuOpen ? (
-              <path d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            )}
+            {isMenuOpen ? <path d="M6 18L18 6M6 6l12 12" /> : <path d="M4 6h16M4 12h16M4 18h16" />}
           </svg>
         </button>
       </div>
@@ -101,7 +101,7 @@ export default function Header() {
       {isMenuOpen && (
         <div className="md:hidden border-t bg-white">
           <nav className="container mx-auto px-4 py-4 space-y-3">
-            {navigation.map((item) => (
+            {navigation.map(item => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -113,13 +113,19 @@ export default function Header() {
             ))}
             <div className="pt-4 border-t space-y-3">
               <LanguageSelector />
-              <button className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">
-                {t('serviceIntro')}
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors font-medium text-lg"
+              >
+                <MdOutlineFileDownload size={24} />
+                소개서 다운로드 하기
               </button>
             </div>
           </nav>
         </div>
       )}
+
+      <DownloadModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </header>
   );
 }
